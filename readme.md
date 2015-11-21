@@ -13,7 +13,7 @@ Also,
 > a neurological disorder characterized by jerky involuntary movements affecting especially the shoulders, hips, and face.
 
 
-How wonderful.
+How wonderful. Here's some context: http://www.slideshare.net/JonDavis20/initial-simple-ponderings-on-discrete-subprocesses-and-orchestrating-convergence
 
 ##What this is (currently)
 
