@@ -8,6 +8,6 @@ namespace Chorea
 {
     public interface IPublishMessage
     {
-        void Publish<T>(T message);
+        void Publish(object message);
     }
 }

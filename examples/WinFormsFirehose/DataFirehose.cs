@@ -20,7 +20,7 @@ namespace WinFormsFirehose
 
         public IPublishedMessages PublishedMessages { get; set; } = new LocalMessagePublishContainer();
 
-        public void Publish<T>(T message)
+        public void Publish(object message)
         {
             ((LocalMessagePublishContainer)PublishedMessages).Publish(message);
         }

@@ -34,7 +34,7 @@ namespace Chorea
             return GetPublishedMessagesSince(last);
         }
 
-        public void Publish<T>(T message)
+        public void Publish(object message)
         {
             _messages.Add(message);
             if (Threshold < _messages.Count)
