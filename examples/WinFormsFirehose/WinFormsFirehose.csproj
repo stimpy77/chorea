@@ -81,7 +81,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\chorea\Chorea.csproj">
+    <ProjectReference Include="..\..\src\Chorea\chorea\Chorea.csproj">
       <Project>{d00973bb-7131-445c-bdb5-e18f9b0f992d}</Project>
       <Name>Chorea</Name>
     </ProjectReference>

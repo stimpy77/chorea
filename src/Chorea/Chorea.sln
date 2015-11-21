@@ -14,7 +14,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Examples", "Examples", "{BF
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleInput", "..\..\examples\ConsoleInput\ConsoleInput.csproj", "{3E695FEA-FA84-4037-A35D-49EDD2649A36}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinFormsFirehose", "WinFormsFirehose\WinFormsFirehose.csproj", "{43417793-BB6C-460A-9A2D-E2C610FAF39C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinFormsFirehose", "..\..\examples\WinFormsFirehose\WinFormsFirehose.csproj", "{43417793-BB6C-460A-9A2D-E2C610FAF39C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
