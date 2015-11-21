@@ -30,7 +30,7 @@ namespace Chorea
             }
         }
 
-        public EventHandler<MessageEventArgs> MessageReceived;
+        public event EventHandler<MessageEventArgs> MessageReceived;
         readonly List<object> _microServices = new List<object>();
 
         public virtual void RegisterMessageSource(object service)

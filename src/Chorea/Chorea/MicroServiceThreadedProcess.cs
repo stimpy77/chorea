@@ -15,10 +15,10 @@ namespace Chorea
         protected bool Stopped { get; set; }
         public virtual void Start()
         {
-            this.Stopped = false;
+            Stopped = false;
+            Starting?.Invoke(this, new EventArgs());
             _loopThread = new Thread(Run);
             _loopThread.Start();
-            this.Starting?.Invoke(this, new EventArgs());
         }
 
         public virtual void Stop()

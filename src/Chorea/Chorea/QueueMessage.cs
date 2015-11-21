@@ -17,5 +17,9 @@ namespace Chorea
         public QueueMessage() { }
         public string MessageType { get; set; }
         public string Message { get; set; }
+        public override string ToString()
+        {
+            return MessageType + ":" + Message;
+        }
     }
 }
