@@ -18,6 +18,7 @@ How wonderful.
 ##What this is (currently)
 
 A playground of some interfaces and classes that make it easy to run an actor-like component and send data back using a basic messaging subsystem.
+Actually, there is nothing actor-like in here at all yet. There's some subprocess-y stuff in here though.
 
 ##What I want
 
