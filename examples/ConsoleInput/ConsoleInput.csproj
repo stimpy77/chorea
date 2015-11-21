@@ -4,15 +4,17 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{D00973BB-7131-445C-BDB5-E18F9B0F992D}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{3E695FEA-FA84-4037-A35D-49EDD2649A36}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Chorea</RootNamespace>
-    <AssemblyName>Chorea</AssemblyName>
+    <RootNamespace>ConsoleInput</RootNamespace>
+    <AssemblyName>ConsoleInput</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,6 +24,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -40,17 +43,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IEnqueueMessage.cs" />
-    <Compile Include="IHasMessageQueue.cs" />
-    <Compile Include="IHasPublishedMessages.cs" />
-    <Compile Include="IPublishMessage.cs" />
-    <Compile Include="IStartStop.cs" />
-    <Compile Include="MessageEventArgs.cs" />
-    <Compile Include="MessageEventDispatcher.cs" />
-    <Compile Include="BasicMessageQueueContainer.cs" />
-    <Compile Include="MicroServiceThreadedProcess.cs" />
+    <Compile Include="CommandProcessor.cs" />
+    <Compile Include="ConsoleCommandInputService.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="QueueMessage.cs" />
+    <Compile Include="UserCommandMessage.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Chorea\Chorea\Chorea.csproj">
+      <Project>{d00973bb-7131-445c-bdb5-e18f9b0f992d}</Project>
+      <Name>Chorea</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
