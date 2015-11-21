@@ -1,8 +1,0 @@
-m:\dev\prj\chorea\examples\ConsoleInput\bin\Debug\ConsoleInput.exe.config
-m:\dev\prj\chorea\examples\ConsoleInput\obj\Debug\ConsoleInput.csprojResolveAssemblyReference.cache
-m:\dev\prj\chorea\examples\ConsoleInput\bin\Debug\ConsoleInput.exe
-m:\dev\prj\chorea\examples\ConsoleInput\bin\Debug\ConsoleInput.pdb
-m:\dev\prj\chorea\examples\ConsoleInput\bin\Debug\Chorea.dll
-m:\dev\prj\chorea\examples\ConsoleInput\bin\Debug\Chorea.pdb
-m:\dev\prj\chorea\examples\ConsoleInput\obj\Debug\ConsoleInput.exe
-m:\dev\prj\chorea\examples\ConsoleInput\obj\Debug\ConsoleInput.pdb
