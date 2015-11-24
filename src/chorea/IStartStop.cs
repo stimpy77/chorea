@@ -15,4 +15,10 @@ namespace Chorea
     {
         void Stop();
     }
+
+    public interface IPausable
+    {
+        void Pause();
+        void Continue();
+    }
 }

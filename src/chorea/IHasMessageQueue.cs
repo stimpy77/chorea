@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,6 @@ namespace Chorea
 {
     public interface IHasMessageQueue
     {
-        Queue<object> MessageQueue { get; }
+        ConcurrentQueue<object> MessageQueue { get; }
     }
 }

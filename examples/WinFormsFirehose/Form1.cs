@@ -14,6 +14,7 @@ namespace WinFormsFirehose
     public partial class Form1 : Form
     {
         private readonly MessageEventPumpDispatcher _microserviceMessageDispatcher;
+        private bool _paused;
 
         public Form1()
         {
@@ -69,6 +70,32 @@ namespace WinFormsFirehose
         private void cmdRemoveFirehose_Click(object sender, EventArgs e)
         {
             RemoveFirehose();
+        }
+
+        private void cmdPauseContinue_Click(object sender, EventArgs e)
+        {
+            if (_paused)
+            {
+                Continue();
+                cmdPauseContinue.Text = "Pause";
+            }
+            else
+            {
+                Pause();
+                cmdPauseContinue.Text = "Continue";
+            }
+        }
+
+        private void Pause()
+        {
+            _paused = true;
+            _microserviceMessageDispatcher.Pause();
+        }
+
+        private void Continue()
+        {
+            _paused = false;
+            _microserviceMessageDispatcher.Continue();
         }
     }
 }

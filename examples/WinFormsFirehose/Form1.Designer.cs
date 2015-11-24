@@ -32,6 +32,7 @@
             this.cmdAddFirehose = new System.Windows.Forms.Button();
             this.cmdRemoveFirehose = new System.Windows.Forms.Button();
             this.lblFirehoseCount = new System.Windows.Forms.Label();
+            this.cmdPauseContinue = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lstMessages
@@ -77,11 +78,22 @@
             this.lblFirehoseCount.TabIndex = 3;
             this.lblFirehoseCount.Text = "Firehouse count: 0";
             // 
+            // cmdPauseContinue
+            // 
+            this.cmdPauseContinue.Location = new System.Drawing.Point(228, 271);
+            this.cmdPauseContinue.Name = "cmdPauseContinue";
+            this.cmdPauseContinue.Size = new System.Drawing.Size(78, 23);
+            this.cmdPauseContinue.TabIndex = 4;
+            this.cmdPauseContinue.Text = "Pause";
+            this.cmdPauseContinue.UseVisualStyleBackColor = true;
+            this.cmdPauseContinue.Click += new System.EventHandler(this.cmdPauseContinue_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(607, 306);
+            this.Controls.Add(this.cmdPauseContinue);
             this.Controls.Add(this.lblFirehoseCount);
             this.Controls.Add(this.cmdRemoveFirehose);
             this.Controls.Add(this.cmdAddFirehose);
@@ -102,6 +114,7 @@
         private System.Windows.Forms.Button cmdAddFirehose;
         private System.Windows.Forms.Button cmdRemoveFirehose;
         private System.Windows.Forms.Label lblFirehoseCount;
+        private System.Windows.Forms.Button cmdPauseContinue;
     }
 }
 

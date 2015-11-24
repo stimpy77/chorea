@@ -9,12 +9,15 @@ namespace WinFormsFirehose
 {
     public class DataFirehose : MicroServiceThreadedProcess, IHasPublishedMessages, IPublishMessage
     {
+        private readonly int _firehoseIndex = ++_firehoseCount;
+        private static int _firehoseCount;
+
         public override void Run()
         {
             while (!Stopped)
             {
-                Publish(new QueueMessage("Some guid", Guid.NewGuid().ToString()));
-                System.Threading.Thread.Sleep(100);
+                Publish(new QueueMessage("Firehose", "Firehose " + _firehoseIndex + " message: " + Guid.NewGuid().ToString()));
+                System.Threading.Thread.Sleep(10);
             }
         }
 

@@ -7,12 +7,13 @@ using System.Threading.Tasks;
 
 namespace Chorea
 {
-    public abstract class MicroServiceEventPumpTimerProcess : IStartable, IStoppable, IDisposable
+    public abstract class MicroServiceEventPumpTimerProcess : IStartable, IStoppable, IPausable, IDisposable
     {
         public event EventHandler Starting;
         public event EventHandler Stopping;
 
         readonly System.Windows.Forms.Timer _timer = new System.Windows.Forms.Timer();
+        private bool _paused;
 
         protected MicroServiceEventPumpTimerProcess()
         {
@@ -42,7 +43,7 @@ namespace Chorea
             _timer.Stop();
         }
 
-        public virtual bool IsRunning => _timer.Enabled;
+        public virtual bool IsRunning => _timer.Enabled || _paused;
 
         public abstract void Tick();
 
@@ -50,5 +51,18 @@ namespace Chorea
         {
             if (IsRunning) _timer.Stop();
         }
+
+        public void Pause()
+        {
+            _paused = true;
+            _timer.Enabled = false;
+        }
+
+        public void Continue()
+        {
+            _paused = true;
+            _timer.Enabled = true;
+        }
     }
+    
 }

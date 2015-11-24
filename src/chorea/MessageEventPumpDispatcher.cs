@@ -47,10 +47,11 @@ namespace Chorea
             foreach (IHasMessageQueue service in _microServices.Where(s => s is IHasMessageQueue))
             {
                 // flush this service's queue
-                while (service.MessageQueue.Count != 0)
+                while (!service.MessageQueue.IsEmpty)
                 {
-                    var message = service.MessageQueue.Dequeue();
-                    MessageReceived?.Invoke(this, new MessageEventArgs(message));
+                    object message;
+                    if (service.MessageQueue.TryDequeue(out message))
+                        MessageReceived?.Invoke(this, new MessageEventArgs(message));
                 }
             }
             // iterate over known IHasPublishedMessages services

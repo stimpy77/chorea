@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,12 +11,12 @@ namespace Chorea
     {
         public BasicMessageQueueContainer()
         {
-            MessageQueue = new Queue<object>();
+            MessageQueue = new ConcurrentQueue<object>();
         }
         public void EnqueueMessage(object message)
         {
             MessageQueue.Enqueue(message);
         }
-        public Queue<object> MessageQueue { get; set; }
+        public ConcurrentQueue<object> MessageQueue { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -9,13 +10,13 @@ using Chorea;
 namespace ConsoleInput
 {
     public class ConsoleCommandInputService : MicroServiceThreadedProcess,
-        //IHasMessageQueue
-    IHasPublishedMessages 
+        IHasMessageQueue
+        //IHasPublishedMessages 
     {
-        public IPublishedMessages PublishedMessages { get; set; } = new LocalMessagePublishContainer();
+        //public IPublishedMessages PublishedMessages { get; set; } = new LocalMessagePublishContainer();
 
-        //readonly BasicMessageQueueContainer _messageQueue = new BasicMessageQueueContainer();
-        //public Queue<object> MessageQueue => _messageQueue.MessageQueue;
+        readonly BasicMessageQueueContainer _messageQueue = new BasicMessageQueueContainer();
+        public ConcurrentQueue<object> MessageQueue => _messageQueue.MessageQueue;
 
         public override void Run()
         {
@@ -24,8 +25,8 @@ namespace ConsoleInput
                 var command = Console.ReadLine();
                 if (!string.IsNullOrEmpty((command ?? "").Trim()))
                 {
-                    //_messageQueue.EnqueueMessage(new UserCommandMessage(command));
-                    ((LocalMessagePublishContainer)PublishedMessages).Publish(new UserCommandMessage(command));
+                    _messageQueue.EnqueueMessage(new UserCommandMessage(command));
+                    //((LocalMessagePublishContainer)PublishedMessages).Publish(new UserCommandMessage(command));
                 }
             }
         }
