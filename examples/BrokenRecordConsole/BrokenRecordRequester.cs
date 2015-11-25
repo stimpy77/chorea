@@ -4,7 +4,7 @@ using Chorea;
 
 namespace BrokenRecordConsole
 {
-    public class BrokenRecordRequester : MicroServiceThreadedProcess
+    public class BrokenRecordRequester : ThreadedMicroserviceProcess
     {
         Random random = new Random();
 

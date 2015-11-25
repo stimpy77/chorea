@@ -2,7 +2,7 @@
 
 namespace Chorea.Windows
 {
-    public abstract class MicroServiceEventPumpTimerProcess : IStartable, IStoppable, IPausable, IDisposable
+    public abstract class EventPumpMicroserviceProcess : IStartable, IStoppable, IPausable, IDisposable
     {
         public event EventHandler Starting;
         public event EventHandler Stopping;
@@ -10,7 +10,7 @@ namespace Chorea.Windows
         readonly System.Windows.Forms.Timer _timer = new System.Windows.Forms.Timer();
         private bool _paused;
 
-        protected MicroServiceEventPumpTimerProcess()
+        protected EventPumpMicroserviceProcess()
         {
             _timer.Interval = 10;
             _timer.Tick += (sender, args) => Tick();

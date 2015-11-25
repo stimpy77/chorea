@@ -7,7 +7,7 @@ using Chorea;
 
 namespace WinFormsFirehose
 {
-    public class DataFirehose : MicroServiceThreadedProcess, IHasPublishedMessages<QueueMessage>, IPublishMessage<QueueMessage>, IPausable
+    public class DataFirehose : ThreadedMicroserviceProcess, IHasPublishedMessages<QueueMessage>, IPublishMessage<QueueMessage>, IPausable
     {
         readonly int _firehoseIndex = ++_firehoseCount;
         static int _firehoseCount;

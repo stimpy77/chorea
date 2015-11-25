@@ -51,7 +51,7 @@
     <Compile Include="MessageEventArgs.cs" />
     <Compile Include="ThreadedMessageEventDispatcher.cs" />
     <Compile Include="BasicMessageQueueContainer.cs" />
-    <Compile Include="MicroServiceThreadedProcess.cs" />
+    <Compile Include="ThreadedMicroserviceProcess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PublishedMessagesContainer.cs" />
     <Compile Include="QueueMessage.cs" />

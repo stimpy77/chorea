@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Chorea
 {
-    public abstract class MicroServiceThreadedProcess : IStartable, IStoppable, IDisposable
+    public abstract class ThreadedMicroserviceProcess : IStartable, IStoppable, IDisposable
     {
         public event EventHandler Starting;
         public event EventHandler Stopping;

@@ -41,8 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MessageEventPumpDispatcher.cs" />
-    <Compile Include="MicroServiceEventPumpTimerProcess.cs" />
+    <Compile Include="EventPumpMessageEventDispatcher.cs" />
+    <Compile Include="EventPumpMicroserviceProcess.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

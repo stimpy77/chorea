@@ -5,7 +5,7 @@ using System.Threading;
 
 namespace Chorea
 {
-    public class ThreadedMessageEventDispatcher<TMessage> : MicroServiceThreadedProcess, IMessageEventDispatcher<TMessage>, IDisposable
+    public class ThreadedMessageEventDispatcher<TMessage> : ThreadedMicroserviceProcess, IMessageEventDispatcher<TMessage>, IDisposable
     {
         public ThreadedMessageEventDispatcher(string route = null)
         {

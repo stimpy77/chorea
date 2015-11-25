@@ -5,10 +5,10 @@ using System.Threading;
 
 namespace Chorea.Windows
 {
-    public class MessageEventPumpDispatcher<TMessage> : MicroServiceEventPumpTimerProcess, IMessageEventDispatcher<TMessage>, IDisposable
+    public class EventPumpMessageEventDispatcher<TMessage> : EventPumpMicroserviceProcess, IMessageEventDispatcher<TMessage>, IDisposable
     {
 
-        public MessageEventPumpDispatcher(string route = null)
+        public EventPumpMessageEventDispatcher(string route = null)
         {
             _route = route;
             Starting += OnStarting;

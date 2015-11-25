@@ -14,13 +14,13 @@ namespace WinFormsFirehose
 {
     public partial class Form1 : Form
     {
-        private readonly MessageEventPumpDispatcher<QueueMessage> _microserviceMessageDispatcher;
+        private readonly EventPumpMessageEventDispatcher<QueueMessage> _microserviceMessageDispatcher;
         private bool _paused;
 
         public Form1()
         {
             InitializeComponent();
-            _microserviceMessageDispatcher = new MessageEventPumpDispatcher<QueueMessage>();
+            _microserviceMessageDispatcher = new EventPumpMessageEventDispatcher<QueueMessage>();
             _microserviceMessageDispatcher.MessageReceived += MicroserviceMessageDispatcherOnMessageReceived;
         }
 

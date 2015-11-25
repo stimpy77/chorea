@@ -9,7 +9,7 @@ using Chorea;
 
 namespace ConsoleInput
 {
-    public class ConsoleCommandInputService : MicroServiceThreadedProcess, 
+    public class ConsoleCommandInputService : ThreadedMicroserviceProcess, 
         IHasBclMessageQueue<QueueMessage>
         //IHasPublishedMessages<QueueMessage>
     {
