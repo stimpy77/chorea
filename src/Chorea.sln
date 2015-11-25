@@ -1,0 +1,58 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chorea", "chorea\Chorea.csproj", "{D00973BB-7131-445C-BDB5-E18F9B0F992D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{F79E6CAD-1763-450F-BB52-5307194A1AF7}"
+	ProjectSection(SolutionItems) = preProject
+		..\readme.md = ..\readme.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Examples", "Examples", "{BF3708DD-1574-4182-ABB4-C6209C521278}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleInput", "..\examples\ConsoleInput\ConsoleInput.csproj", "{3E695FEA-FA84-4037-A35D-49EDD2649A36}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinFormsFirehose", "..\examples\WinFormsFirehose\WinFormsFirehose.csproj", "{43417793-BB6C-460A-9A2D-E2C610FAF39C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BrokenRecordConsole", "..\examples\BrokenRecordConsole\BrokenRecordConsole.csproj", "{4FDC4D73-7CFC-4CF2-BFF4-504357C970DF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chorea.Windows", "Chorea.Windows\Chorea.Windows.csproj", "{4909249A-B764-42E6-91E6-EB9389D0C3CF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D00973BB-7131-445C-BDB5-E18F9B0F992D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D00973BB-7131-445C-BDB5-E18F9B0F992D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D00973BB-7131-445C-BDB5-E18F9B0F992D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D00973BB-7131-445C-BDB5-E18F9B0F992D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3E695FEA-FA84-4037-A35D-49EDD2649A36}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3E695FEA-FA84-4037-A35D-49EDD2649A36}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3E695FEA-FA84-4037-A35D-49EDD2649A36}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3E695FEA-FA84-4037-A35D-49EDD2649A36}.Release|Any CPU.Build.0 = Release|Any CPU
+		{43417793-BB6C-460A-9A2D-E2C610FAF39C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43417793-BB6C-460A-9A2D-E2C610FAF39C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{43417793-BB6C-460A-9A2D-E2C610FAF39C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{43417793-BB6C-460A-9A2D-E2C610FAF39C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4FDC4D73-7CFC-4CF2-BFF4-504357C970DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4FDC4D73-7CFC-4CF2-BFF4-504357C970DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4FDC4D73-7CFC-4CF2-BFF4-504357C970DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4FDC4D73-7CFC-4CF2-BFF4-504357C970DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4909249A-B764-42E6-91E6-EB9389D0C3CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4909249A-B764-42E6-91E6-EB9389D0C3CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4909249A-B764-42E6-91E6-EB9389D0C3CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4909249A-B764-42E6-91E6-EB9389D0C3CF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{3E695FEA-FA84-4037-A35D-49EDD2649A36} = {BF3708DD-1574-4182-ABB4-C6209C521278}
+		{43417793-BB6C-460A-9A2D-E2C610FAF39C} = {BF3708DD-1574-4182-ABB4-C6209C521278}
+		{4FDC4D73-7CFC-4CF2-BFF4-504357C970DF} = {BF3708DD-1574-4182-ABB4-C6209C521278}
+	EndGlobalSection
+EndGlobal
