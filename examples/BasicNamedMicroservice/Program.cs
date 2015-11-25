@@ -14,8 +14,9 @@ namespace BasicNamedMicroservice
         {
             using (var dispatcher = new ThreadedMessageEventDispatcher<BrokenRecordRequest>("Marco"))
             {
-                var messageSystem = new BasicMessageQueueContainer<BrokenRecordRequest>("Marco");
-                    //new LocalMessagePublishContainer<BrokenRecordRequest>();
+                var messageSystem = 
+                    //new BasicMessageQueueContainer<BrokenRecordRequest>("Marco");
+                    new LocalMessagePublishContainer<BrokenRecordRequest>("Marco");
                 var requester = new BrokenRecordRequester(messageSystem);
                 dispatcher.RegisterMessageSource(messageSystem);
                 var responder = new BrokenRecordResponder(dispatcher);

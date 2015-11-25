@@ -9,8 +9,13 @@ namespace Chorea
 {
     public class LocalMessagePublishContainer<TMessage> : IPublishedMessages<TMessage>, IPublishMessage<TMessage>
     {
-        private readonly List<KeyValuePair<string, TMessage>> _messages = new List<KeyValuePair<string, TMessage>>();
+        public LocalMessagePublishContainer(string intendedRecipient = null)
+        {
+            _intendedRecipient = intendedRecipient ?? "*";
+        }
+        readonly List<KeyValuePair<string, TMessage>> _messages = new List<KeyValuePair<string, TMessage>>();
         public int last;
+        private string _intendedRecipient;
 
         public IEnumerable<KeyValuePair<string, TMessage>> GetAllPublishedMessages(string recipientKey = null)
         {
@@ -19,6 +24,7 @@ namespace Chorea
 
         public IEnumerable<KeyValuePair<string, TMessage>> GetAllPublishedMessagesSince(object id, string recipientKey = null)
         {
+            recipientKey = recipientKey ?? _intendedRecipient;
             if (!(id is int)) throw new ArgumentException("This container uses System.Int32 as the message ID.");
             var idx = (int) id;
             var count = _messages.Count;
@@ -32,6 +38,7 @@ namespace Chorea
 
         public IEnumerable<KeyValuePair<string, TMessage>> GetAllPublishedMessagesSinceLast(string recipientKey = null)
         {
+            recipientKey = recipientKey ?? _intendedRecipient;
             return GetAllPublishedMessagesSince(last).Where(
                 m => recipientKey == null || recipientKey == "*" || m.Key == recipientKey);
         }

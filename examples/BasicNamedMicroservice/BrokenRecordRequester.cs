@@ -9,24 +9,23 @@ namespace BasicNamedMicroservice
 {
     public class BrokenRecordRequester : MicroServiceThreadedProcess
     {
-        private IHasMessageQueue<BrokenRecordRequest> _queueSystem;
-        //private readonly IPublishMessage _messageSystem;
+        //private IHasMessageQueue<BrokenRecordRequest> _queueSystem;
+        private readonly IPublishMessage<BrokenRecordRequest> _messageSystem;
 
 
-        public BrokenRecordRequester(IHasMessageQueue<BrokenRecordRequest> queueSystem)
+        public BrokenRecordRequester(
+            //IHasMessageQueue<BrokenRecordRequest> messageTarget)
+            IPublishMessage<BrokenRecordRequest> messageTarget)
         {
-            _queueSystem = queueSystem;
+            //_queueSystem = messageTarget;
+            _messageSystem = messageTarget;
         }
-        //public BrokenRecordRequester(IPublishMessage messageSystem)
-        //{
-        //    _messageSystem = messageSystem;
-        //}
         public override void Run()
         {
             while (!Stopped)
             {
-                _queueSystem.MessageQueue.Enqueue(new BrokenRecordRequest { Message = "Marco?" });
-                //_messageSystem.Publish("Marco", new BrokenRecordRequest {Message="Marco?"});
+                //_queueSystem.MessageQueue.Enqueue(new BrokenRecordRequest { Message = "Marco?" });
+                _messageSystem.Publish("Marco", new BrokenRecordRequest {Message="Marco?"});
                 System.Threading.Thread.Sleep(500);
             }
         }
