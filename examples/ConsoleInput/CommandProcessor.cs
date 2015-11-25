@@ -44,8 +44,17 @@ namespace ConsoleInput
                     break;
                 default:
                     Console.ForegroundColor = ConsoleColor.Yellow;
+
+                    // push prompt down
+                    var pos = Console.CursorLeft;
+                    Console.MoveBufferArea(0, Console.CursorTop, Console.BufferWidth, 2, 0, Console.CursorTop+2);
+                    Console.SetCursorPosition(0, Console.CursorTop);
+
                     Console.WriteLine("I don't understand command: " + command);
                     Console.WriteLine("Try \"exit\".");
+
+                    // restore prompt cursor position
+                    Console.SetCursorPosition(pos, Console.CursorTop);
                     Console.ResetColor();
                     break;
             }

@@ -18,11 +18,14 @@ namespace ConsoleInput
         readonly BasicMessageQueueContainer<UserCommandMessage> _messageQueue = new BasicMessageQueueContainer<UserCommandMessage>();
         public ConcurrentQueue<UserCommandMessage> MessageQueue => _messageQueue.MessageQueue;
         public string QueueName => "CommandInput";
+        private string Prompt { get; set; } = "? ";
 
         public override void Run()
         {
+            Console.WriteLine("Enter a command.");
             while (!Stopped)
             {
+                Console.Write(Prompt);
                 var command = Console.ReadLine();
                 if (!string.IsNullOrEmpty((command ?? "").Trim()))
                 {

@@ -1,6 +1,10 @@
 #chorea
 
-Root word for "choreography"
+Root word for "choreography".
+
+1. An Ancient Greek circular dance accompanied by a chorus.
+2. (usually in the plural) A dance in a ring, round dance.
+3. (metonymically) A round dance of the circular motions of the stars.
 
 Also,
 

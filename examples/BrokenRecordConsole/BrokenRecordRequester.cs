@@ -36,8 +36,10 @@ namespace BrokenRecordConsole
 
         private void Publish(string recipient, string message)
         {
-            //_queueSystem.MessageQueue.Enqueue(new BrokenRecordRequest { Message = message });
+            //if (recipient == "Marco") _queueSystem.MessageQueue.Enqueue(new BrokenRecordRequest { Message = message });
             _messageSystem.Publish(recipient, new BrokenRecordRequest { Message = message });
+            if (recipient != "Marco") Console.WriteLine("This will be ignored: " 
+                + message + " (for: " + recipient + ")");
         }
     }
 }
