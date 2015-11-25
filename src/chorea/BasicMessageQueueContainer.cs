@@ -14,7 +14,7 @@ namespace Chorea
             MessageQueue = new ConcurrentQueue<T>();
             QueueName = queueName ?? "*";
         }
-        public void EnqueueMessage(string intendedRecipient, T message)
+        public void EnqueueMessage(string route, T message)
         {
             MessageQueue.Enqueue(message);
         }

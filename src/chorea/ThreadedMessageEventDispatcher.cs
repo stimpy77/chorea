@@ -7,11 +7,11 @@ namespace Chorea
 {
     public class ThreadedMessageEventDispatcher<TMessage> : MicroServiceThreadedProcess, IMessageEventDispatcher<TMessage>, IDisposable
     {
-        public ThreadedMessageEventDispatcher(string intendedRecipient = null)
+        public ThreadedMessageEventDispatcher(string route = null)
         {
             Starting += OnStarting;
             Stopping += OnStopping;
-            _intendedRecipient = intendedRecipient;
+            _route = route;
         }
 
         private void OnStarting(object sender, EventArgs eventArgs)
@@ -31,7 +31,7 @@ namespace Chorea
 
         public event EventHandler<MessageEventArgs<TMessage>> MessageReceived;
         readonly List<object> _microServices = new List<object>();
-        private readonly string _intendedRecipient;
+        private readonly string _route;
 
         public virtual void RegisterMessageSource(IPublishedMessages<TMessage> service)
         {
@@ -68,7 +68,7 @@ namespace Chorea
                     // flush this service's queue
                     //var message = service.MessageQueue.Dequeue();
                     //MessageReceived?.Invoke(this, new MessageEventArgs(message));
-                    foreach (var message in service.PublishedMessages.GetAllPublishedMessagesSinceLast(_intendedRecipient))
+                    foreach (var message in service.PublishedMessages.GetAllPublishedMessagesSinceLast(_route))
                     {
                         MessageReceived?.Invoke(this, new MessageEventArgs<TMessage>(message));
                     }

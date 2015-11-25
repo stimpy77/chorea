@@ -10,9 +10,9 @@ namespace Chorea
     public class MessageEventPumpDispatcher<TMessage> : MicroServiceEventPumpTimerProcess, IMessageEventDispatcher<TMessage>, IDisposable
     {
 
-        public MessageEventPumpDispatcher(string intendedRecipient = null)
+        public MessageEventPumpDispatcher(string route = null)
         {
-            _intendedRecipient = intendedRecipient;
+            _route = route;
             Starting += OnStarting;
             Stopping += OnStopping;
         }
@@ -34,7 +34,7 @@ namespace Chorea
 
         public event EventHandler<MessageEventArgs<TMessage>> MessageReceived;
         readonly List<object> _microServices = new List<object>();
-        private readonly string _intendedRecipient;
+        private readonly string _route;
 
         public virtual void RegisterMessageSource(object service)
         {
@@ -62,7 +62,7 @@ namespace Chorea
                 // flush this service's queue
                 //var message = service.MessageQueue.Dequeue();
                 //MessageReceived?.Invoke(this, new MessageEventArgs(message));
-                foreach (var message in service.PublishedMessages.GetAllPublishedMessagesSinceLast(_intendedRecipient))
+                foreach (var message in service.PublishedMessages.GetAllPublishedMessagesSinceLast(_route))
                 {
                     MessageReceived?.Invoke(this, new MessageEventArgs<TMessage>(message));
                 }

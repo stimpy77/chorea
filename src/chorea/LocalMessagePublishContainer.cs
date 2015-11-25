@@ -7,11 +7,11 @@ namespace Chorea
     public class LocalMessagePublishContainer<TMessage> : IPublishedMessages<TMessage>, IPublishMessage<TMessage>
     {
         int _last;
-        readonly string _intendedRecipient;
+        readonly string _route;
 
-        public LocalMessagePublishContainer(string intendedRecipient = null)
+        public LocalMessagePublishContainer(string route = null)
         {
-            _intendedRecipient = intendedRecipient ?? "*";
+            _route = route ?? "*";
         }
         readonly List<KeyValuePair<string, TMessage>> _messages = new List<KeyValuePair<string, TMessage>>();
         public IEnumerable<KeyValuePair<string, TMessage>> GetAllPublishedMessages(string recipientKey = null)
@@ -21,7 +21,7 @@ namespace Chorea
 
         public IEnumerable<KeyValuePair<string, TMessage>> GetAllPublishedMessagesSince(object id, string recipientKey = null)
         {
-            recipientKey = recipientKey ?? _intendedRecipient;
+            recipientKey = recipientKey ?? _route;
             if (!(id is int)) throw new ArgumentException("This container uses System.Int32 as the message ID.");
             var idx = (int) id;
             var count = _messages.Count;
@@ -35,7 +35,7 @@ namespace Chorea
 
         public IEnumerable<KeyValuePair<string, TMessage>> GetAllPublishedMessagesSinceLast(string recipientKey = null)
         {
-            recipientKey = recipientKey ?? _intendedRecipient;
+            recipientKey = recipientKey ?? _route;
             return GetAllPublishedMessagesSince(_last).Where(
                 m => recipientKey == null || recipientKey == "*" || m.Key == recipientKey);
         }
@@ -54,9 +54,9 @@ namespace Chorea
             }
         }
 
-        public void Publish(string intendedRecipient, TMessage message)
+        public void Publish(string route, TMessage message)
         {
-            _messages.Add(new KeyValuePair<string, TMessage>(intendedRecipient, message));
+            _messages.Add(new KeyValuePair<string, TMessage>(route, message));
         }
 
         public int Threshold { get; set; } = 1048576;

@@ -8,6 +8,6 @@ namespace Chorea
 {
     public interface IEnqueueMessage<TMessage>
     {
-        void EnqueueMessage(string intendedRecipient, TMessage message);
+        void EnqueueMessage(string route, TMessage message);
     }
 }

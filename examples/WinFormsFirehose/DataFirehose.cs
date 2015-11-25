@@ -27,7 +27,7 @@ namespace WinFormsFirehose
         public void Publish(QueueMessage message)
             => ((LocalMessagePublishContainer<QueueMessage>)PublishedMessages).Publish(message);
 
-        public void Publish(string intendedRecipient, QueueMessage message)
+        public void Publish(string route, QueueMessage message)
             => ((LocalMessagePublishContainer<QueueMessage>)PublishedMessages).Publish(message);
 
         public void Pause()
