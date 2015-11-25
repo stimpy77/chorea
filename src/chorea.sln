@@ -16,7 +16,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleInput", "..\examples
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinFormsFirehose", "..\examples\WinFormsFirehose\WinFormsFirehose.csproj", "{43417793-BB6C-460A-9A2D-E2C610FAF39C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BasicNamedMicroservice", "..\examples\BasicNamedMicroservice\BasicNamedMicroservice.csproj", "{4FDC4D73-7CFC-4CF2-BFF4-504357C970DF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BrokenRecordConsole", "..\examples\BrokenRecordConsole\BrokenRecordConsole.csproj", "{4FDC4D73-7CFC-4CF2-BFF4-504357C970DF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

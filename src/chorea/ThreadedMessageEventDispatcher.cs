@@ -77,13 +77,18 @@ namespace Chorea
             }
         }
 
+        public override void Stop()
+        {
+            foreach (IStoppable stoppable in _microServices.Where(service => service is IStoppable))
+                stoppable.Stop();
+            base.Stop();
+        }
+
         void IDisposable.Dispose()
         {
             if (!Stopped) Stop();
-            foreach (var disposable in _microServices.Select(service => service as IDisposable))
-            {
-                disposable?.Dispose();
-            }
+            foreach (IDisposable disposable in _microServices.Where(service => service is IDisposable))
+                disposable.Dispose();
 
         }
     }

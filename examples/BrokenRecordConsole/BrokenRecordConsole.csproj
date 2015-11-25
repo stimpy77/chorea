@@ -7,8 +7,8 @@
     <ProjectGuid>{4FDC4D73-7CFC-4CF2-BFF4-504357C970DF}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BasicNamedMicroservice</RootNamespace>
-    <AssemblyName>BasicNamedMicroservice</AssemblyName>
+    <RootNamespace>BrokenRecordConsole</RootNamespace>
+    <AssemblyName>BrokenRecordConsole</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

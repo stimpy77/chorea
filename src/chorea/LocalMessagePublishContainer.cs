@@ -1,22 +1,19 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Chorea
 {
     public class LocalMessagePublishContainer<TMessage> : IPublishedMessages<TMessage>, IPublishMessage<TMessage>
     {
+        int _last;
+        readonly string _intendedRecipient;
+
         public LocalMessagePublishContainer(string intendedRecipient = null)
         {
             _intendedRecipient = intendedRecipient ?? "*";
         }
         readonly List<KeyValuePair<string, TMessage>> _messages = new List<KeyValuePair<string, TMessage>>();
-        public int last;
-        private string _intendedRecipient;
-
         public IEnumerable<KeyValuePair<string, TMessage>> GetAllPublishedMessages(string recipientKey = null)
         {
             return _messages.Where(m=>recipientKey == null || m.Key == recipientKey);
@@ -33,13 +30,13 @@ namespace Chorea
                 if (recipientKey == null || _messages[i].Key == recipientKey)
                     yield return _messages[i];
             }
-            last = count - 1;
+            _last = count - 1;
         }
 
         public IEnumerable<KeyValuePair<string, TMessage>> GetAllPublishedMessagesSinceLast(string recipientKey = null)
         {
             recipientKey = recipientKey ?? _intendedRecipient;
-            return GetAllPublishedMessagesSince(last).Where(
+            return GetAllPublishedMessagesSince(_last).Where(
                 m => recipientKey == null || recipientKey == "*" || m.Key == recipientKey);
         }
 
@@ -51,7 +48,7 @@ namespace Chorea
                 lock (_messages)
                 {
                     _messages.RemoveAt(0);
-                    last--;
+                    _last--;
                 }
 
             }
