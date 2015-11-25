@@ -16,15 +16,15 @@ namespace Chorea
 
         private void OnStarting(object sender, EventArgs eventArgs)
         {
-            foreach (var startable in _microServices.Select(service => service as IStartable))
-                startable?.Start();
+            foreach (IStartable startable in _microServices.Where(service => service is IStartable))
+                startable.Start();
         }
 
         private void OnStopping(object sender, EventArgs eventArgs)
         {
-            foreach (var stoppable in _microServices.Select(service => service as IStoppable))
+            foreach (IStoppable stoppable in _microServices.Where(service => service is IStoppable))
             {
-                stoppable?.Stop();
+                stoppable.Stop();
                 Thread.Yield();
             }
         }

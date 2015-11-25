@@ -70,12 +70,12 @@ namespace WinFormsFirehose
             lblFirehoseCount.Text = "Firehose count: " + _microserviceMessageDispatcher.MessageSources.Count;
         }
 
-        private void cmdRemoveFirehose_Click(object sender, EventArgs e)
+        void cmdRemoveFirehose_Click(object sender, EventArgs e)
         {
             RemoveFirehose();
         }
 
-        private void cmdPauseContinue_Click(object sender, EventArgs e)
+        void cmdPauseContinue_Click(object sender, EventArgs e)
         {
             if (_paused)
             {
