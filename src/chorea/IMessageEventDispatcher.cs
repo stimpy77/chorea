@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Chorea
 {
-    public interface IPublishMessage<TMessage>
+    public interface IMessageEventDispatcher<TMessage>
     {
-        void Publish(string intendedRecipient, TMessage message);
+        event EventHandler<MessageEventArgs<TMessage>> MessageReceived;
     }
 }

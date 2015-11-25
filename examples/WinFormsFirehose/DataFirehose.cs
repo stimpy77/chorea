@@ -7,25 +7,37 @@ using Chorea;
 
 namespace WinFormsFirehose
 {
-    public class DataFirehose : MicroServiceThreadedProcess, IHasPublishedMessages, IPublishMessage
+    public class DataFirehose : MicroServiceThreadedProcess, IHasPublishedMessages<QueueMessage>, IPublishMessage<QueueMessage>, IPausable
     {
-        private readonly int _firehoseIndex = ++_firehoseCount;
-        private static int _firehoseCount;
+        readonly int _firehoseIndex = ++_firehoseCount;
+        static int _firehoseCount;
+        private bool _paused;
 
         public override void Run()
         {
             while (!Stopped)
             {
-                Publish(new QueueMessage("Firehose", "Firehose " + _firehoseIndex + " message: " + Guid.NewGuid().ToString()));
+                if (!_paused) Publish(new QueueMessage("Firehose", _firehoseIndex + " message: " + Guid.NewGuid().ToString()));
                 System.Threading.Thread.Sleep(10);
             }
         }
 
-        public IPublishedMessages PublishedMessages { get; set; } = new LocalMessagePublishContainer();
+        public IPublishedMessages<QueueMessage> PublishedMessages { get; set; } = new LocalMessagePublishContainer<QueueMessage>();
 
-        public void Publish(object message)
+        public void Publish(QueueMessage message)
+            => ((LocalMessagePublishContainer<QueueMessage>)PublishedMessages).Publish(message);
+
+        public void Publish(string intendedRecipient, QueueMessage message)
+            => ((LocalMessagePublishContainer<QueueMessage>)PublishedMessages).Publish(message);
+
+        public void Pause()
         {
-            ((LocalMessagePublishContainer)PublishedMessages).Publish(message);
+            _paused = true;
+        }
+
+        public void Continue()
+        {
+            _paused = false;
         }
     }
 }

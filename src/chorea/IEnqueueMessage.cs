@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Chorea
 {
-    public interface IEnqueueMessage
+    public interface IEnqueueMessage<TMessage>
     {
-        void EnqueueMessage(object message);
+        void EnqueueMessage(string intendedRecipient, TMessage message);
     }
 }

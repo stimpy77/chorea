@@ -6,12 +6,17 @@ using System.Threading.Tasks;
 
 namespace Chorea
 {
-    public class MessageEventArgs : EventArgs
+    public class MessageEventArgs<TMessage> : EventArgs
     {
-        public MessageEventArgs(object message)
+        public MessageEventArgs(string queueName, TMessage message)
+        {
+            Message = new KeyValuePair<string, TMessage>(queueName, message);
+        }
+
+        public MessageEventArgs(KeyValuePair<string, TMessage> message)
         {
             Message = message;
         }
-        public object Message { get; set; }
+        public KeyValuePair<string, TMessage> Message { get; set; }
     }
 }

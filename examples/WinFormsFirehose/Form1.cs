@@ -13,13 +13,13 @@ namespace WinFormsFirehose
 {
     public partial class Form1 : Form
     {
-        private readonly MessageEventPumpDispatcher _microserviceMessageDispatcher;
+        private readonly MessageEventPumpDispatcher<QueueMessage> _microserviceMessageDispatcher;
         private bool _paused;
 
         public Form1()
         {
             InitializeComponent();
-            _microserviceMessageDispatcher = new MessageEventPumpDispatcher();
+            _microserviceMessageDispatcher = new MessageEventPumpDispatcher<QueueMessage>();
             _microserviceMessageDispatcher.MessageReceived += MicroserviceMessageDispatcherOnMessageReceived;
         }
 
@@ -33,10 +33,11 @@ namespace WinFormsFirehose
             _microserviceMessageDispatcher.Stop();
         }
 
-        private void MicroserviceMessageDispatcherOnMessageReceived(object sender, MessageEventArgs messageEventArgs)
+        private void MicroserviceMessageDispatcherOnMessageReceived(object sender, MessageEventArgs<QueueMessage> messageEventArgs)
         {
             if (lstMessages.Items.Count > 100) lstMessages.Items.RemoveAt(0);
-            lstMessages.Items.Add(messageEventArgs.Message);
+            var message = messageEventArgs.Message.Value;
+            lstMessages.Items.Add(message);
             lstMessages.SelectedIndex = lstMessages.Items.Count - 1;
         }
 
@@ -44,6 +45,7 @@ namespace WinFormsFirehose
         {
             var firehose = new DataFirehose();
             firehose.Start();
+            if (_paused) firehose.Pause();
             _microserviceMessageDispatcher.RegisterMessageSource(firehose);
             UpdateFirehoseCountLabel();
         }

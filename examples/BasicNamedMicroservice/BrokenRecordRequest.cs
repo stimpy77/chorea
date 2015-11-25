@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Chorea
+namespace BasicNamedMicroservice
 {
-    public interface IPublishMessage<TMessage>
+    public class BrokenRecordRequest
     {
-        void Publish(string intendedRecipient, TMessage message);
+        public string Message { get; set; }
     }
 }

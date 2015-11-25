@@ -9,17 +9,17 @@ namespace ConsoleInput
 {
     public class CommandProcessor
     {
-        readonly MessageEventDispatcher microservices;
+        readonly ThreadedMessageEventDispatcher<UserCommandMessage> microservices;
 
-        public CommandProcessor(MessageEventDispatcher microservices)
+        public CommandProcessor(ThreadedMessageEventDispatcher<UserCommandMessage> microservices)
         {
             this.microservices = microservices;
             microservices.MessageReceived += OnMessageReceived;
         }
 
-        protected void OnMessageReceived(object sender, MessageEventArgs eventArgs)
+        protected void OnMessageReceived(object sender, MessageEventArgs<UserCommandMessage> eventArgs)
         {
-            var message = eventArgs.Message as QueueMessage;
+            var message = eventArgs.Message.Value as QueueMessage;
             if (message == null) return;
             switch (message.MessageType)
             {

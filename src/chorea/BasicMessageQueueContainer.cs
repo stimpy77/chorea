@@ -7,16 +7,19 @@ using System.Threading.Tasks;
 
 namespace Chorea
 {
-    public class BasicMessageQueueContainer : IEnqueueMessage
+    public class BasicMessageQueueContainer<T> : IHasMessageQueue<T>, IEnqueueMessage<T>
     {
-        public BasicMessageQueueContainer()
+        public BasicMessageQueueContainer(string queueName = null)
         {
-            MessageQueue = new ConcurrentQueue<object>();
+            MessageQueue = new ConcurrentQueue<T>();
+            QueueName = queueName ?? "*";
         }
-        public void EnqueueMessage(object message)
+        public void EnqueueMessage(string intendedRecipient, T message)
         {
             MessageQueue.Enqueue(message);
         }
-        public ConcurrentQueue<object> MessageQueue { get; set; }
+        public ConcurrentQueue<T> MessageQueue { get; set; }
+
+        public string QueueName { get; set; }
     }
 }

@@ -1,18 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace Chorea
 {
-    public class MessageEventDispatcher : MicroServiceThreadedProcess, IDisposable
+    public class ThreadedMessageEventDispatcher<TMessage> : MicroServiceThreadedProcess, IMessageEventDispatcher<TMessage>, IDisposable
     {
-        public MessageEventDispatcher()
+        public ThreadedMessageEventDispatcher(string intendedRecipient = null)
         {
             Starting += OnStarting;
             Stopping += OnStopping;
+            _intendedRecipient = intendedRecipient;
         }
 
         private void OnStarting(object sender, EventArgs eventArgs)
@@ -30,10 +29,19 @@ namespace Chorea
             }
         }
 
-        public event EventHandler<MessageEventArgs> MessageReceived;
+        public event EventHandler<MessageEventArgs<TMessage>> MessageReceived;
         readonly List<object> _microServices = new List<object>();
+        private readonly string _intendedRecipient;
 
-        public virtual void RegisterMessageSource(object service)
+        public virtual void RegisterMessageSource(IPublishedMessages<TMessage> service)
+        {
+            _microServices.Add(new PublishedMessagesContainer<TMessage>(service));
+        }
+        public virtual void RegisterMessageSource(IHasPublishedMessages<TMessage> service)
+        {
+            _microServices.Add(service);
+        }
+        public virtual void RegisterMessageSource<T>(IHasMessageQueue<T> service)
         {
             _microServices.Add(service);
         }
@@ -44,25 +52,25 @@ namespace Chorea
             while (!Stopped)
             {
                 // iterate over known IHasMessageQueue services
-                foreach (IHasMessageQueue service in _microServices.Where(s => s is IHasMessageQueue))
+                foreach (IHasMessageQueue<TMessage> service in _microServices.Where(s => s is IHasMessageQueue<TMessage>))
                 {
                     // flush this service's queue
                     while (!service.MessageQueue.IsEmpty)
                     {
-                        object message;
+                        TMessage message;
                         if (service.MessageQueue.TryDequeue(out message))
-                            MessageReceived?.Invoke(this, new MessageEventArgs(message));
+                            MessageReceived?.Invoke(this, new MessageEventArgs<TMessage>(new KeyValuePair<string, TMessage>(service.QueueName, message)));
                     }
                 }
                 // iterate over known IHasPublishedMessages services
-                foreach (IHasPublishedMessages service in _microServices.Where(s => s is IHasPublishedMessages))
+                foreach (IHasPublishedMessages<TMessage> service in _microServices.Where(s => s is IHasPublishedMessages<TMessage>))
                 {
                     // flush this service's queue
                     //var message = service.MessageQueue.Dequeue();
                     //MessageReceived?.Invoke(this, new MessageEventArgs(message));
-                    foreach (var message in service.PublishedMessages.GetPublishedMessagesSinceLast())
+                    foreach (var message in service.PublishedMessages.GetAllPublishedMessagesSinceLast(_intendedRecipient))
                     {
-                        MessageReceived?.Invoke(this, new MessageEventArgs(message));
+                        MessageReceived?.Invoke(this, new MessageEventArgs<TMessage>(message));
                     }
                 }
                 Thread.Sleep(10);

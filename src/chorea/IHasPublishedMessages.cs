@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 namespace Chorea
 {
-    public interface IHasPublishedMessages
+    public interface IHasPublishedMessages<TMessage>
     {
-        IPublishedMessages PublishedMessages { get; }
+        IPublishedMessages<TMessage> PublishedMessages { get; }
     }
 
-    public interface IPublishedMessages
+    public interface IPublishedMessages<TMessage>
     {
-        IEnumerable<object> GetPublishedMessages();
-        IEnumerable<object> GetPublishedMessagesSince(object id);
-        IEnumerable<object> GetPublishedMessagesSinceLast();
+        IEnumerable<KeyValuePair<string, TMessage>> GetAllPublishedMessages(string recipientKey = null);
+        IEnumerable<KeyValuePair<string, TMessage>> GetAllPublishedMessagesSince(object id, string recipientKey = null);
+        IEnumerable<KeyValuePair<string, TMessage>> GetAllPublishedMessagesSinceLast(string recipientKey = null);
     }
 }

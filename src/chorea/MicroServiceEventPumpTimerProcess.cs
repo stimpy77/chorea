@@ -52,13 +52,13 @@ namespace Chorea
             if (IsRunning) _timer.Stop();
         }
 
-        public void Pause()
+        public virtual void Pause()
         {
             _paused = true;
             _timer.Enabled = false;
         }
 
-        public void Continue()
+        public virtual void Continue()
         {
             _paused = true;
             _timer.Enabled = true;

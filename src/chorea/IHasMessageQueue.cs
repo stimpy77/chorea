@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace Chorea
 {
-    public interface IHasMessageQueue
+    public interface IHasMessageQueue<TMessage>
     {
-        ConcurrentQueue<object> MessageQueue { get; }
+        ConcurrentQueue<TMessage> MessageQueue { get; }
+        string QueueName { get; }
     }
 }

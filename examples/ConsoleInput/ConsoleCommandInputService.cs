@@ -10,13 +10,14 @@ using Chorea;
 namespace ConsoleInput
 {
     public class ConsoleCommandInputService : MicroServiceThreadedProcess,
-        IHasMessageQueue
+        IHasMessageQueue<UserCommandMessage>
         //IHasPublishedMessages 
     {
         //public IPublishedMessages PublishedMessages { get; set; } = new LocalMessagePublishContainer();
 
-        readonly BasicMessageQueueContainer _messageQueue = new BasicMessageQueueContainer();
-        public ConcurrentQueue<object> MessageQueue => _messageQueue.MessageQueue;
+        readonly BasicMessageQueueContainer<UserCommandMessage> _messageQueue = new BasicMessageQueueContainer<UserCommandMessage>();
+        public ConcurrentQueue<UserCommandMessage> MessageQueue => _messageQueue.MessageQueue;
+        public string QueueName => "CommandInput";
 
         public override void Run()
         {
@@ -25,7 +26,7 @@ namespace ConsoleInput
                 var command = Console.ReadLine();
                 if (!string.IsNullOrEmpty((command ?? "").Trim()))
                 {
-                    _messageQueue.EnqueueMessage(new UserCommandMessage(command));
+                    _messageQueue.EnqueueMessage("UserCommand", new UserCommandMessage(command));
                     //((LocalMessagePublishContainer)PublishedMessages).Publish(new UserCommandMessage(command));
                 }
             }

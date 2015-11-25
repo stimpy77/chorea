@@ -7,36 +7,38 @@ using System.Threading.Tasks;
 
 namespace Chorea
 {
-    public class LocalMessagePublishContainer : IPublishedMessages, IPublishMessage
+    public class LocalMessagePublishContainer<TMessage> : IPublishedMessages<TMessage>, IPublishMessage<TMessage>
     {
-        private readonly ArrayList _messages = new ArrayList();
+        private readonly List<KeyValuePair<string, TMessage>> _messages = new List<KeyValuePair<string, TMessage>>();
         public int last;
 
-        public IEnumerable<object> GetPublishedMessages()
+        public IEnumerable<KeyValuePair<string, TMessage>> GetAllPublishedMessages(string recipientKey = null)
         {
-            return _messages.Cast<object>();
+            return _messages.Where(m=>recipientKey == null || m.Key == recipientKey);
         }
 
-        public IEnumerable<object> GetPublishedMessagesSince(object id)
+        public IEnumerable<KeyValuePair<string, TMessage>> GetAllPublishedMessagesSince(object id, string recipientKey = null)
         {
             if (!(id is int)) throw new ArgumentException("This container uses System.Int32 as the message ID.");
             var idx = (int) id;
             var count = _messages.Count;
             for (var i = idx + 1; i < count && i >= 0; i++)
             {
-                yield return _messages[i];
+                if (recipientKey == null || _messages[i].Key == recipientKey)
+                    yield return _messages[i];
             }
             last = count - 1;
         }
 
-        public IEnumerable<object> GetPublishedMessagesSinceLast()
+        public IEnumerable<KeyValuePair<string, TMessage>> GetAllPublishedMessagesSinceLast(string recipientKey = null)
         {
-            return GetPublishedMessagesSince(last);
+            return GetAllPublishedMessagesSince(last).Where(
+                m => recipientKey == null || recipientKey == "*" || m.Key == recipientKey);
         }
 
-        public void Publish(object message)
+        public void Publish(TMessage message)
         {
-            _messages.Add(message);
+            _messages.Add(new KeyValuePair<string, TMessage>("*", message));
             if (Threshold < _messages.Count)
             {
                 lock (_messages)
@@ -46,6 +48,11 @@ namespace Chorea
                 }
 
             }
+        }
+
+        public void Publish(string intendedRecipient, TMessage message)
+        {
+            _messages.Add(new KeyValuePair<string, TMessage>(intendedRecipient, message));
         }
 
         public int Threshold { get; set; } = 1048576;

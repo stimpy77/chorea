@@ -7,11 +7,12 @@ using System.Threading.Tasks;
 
 namespace Chorea
 {
-    public class MessageEventPumpDispatcher : MicroServiceEventPumpTimerProcess, IDisposable
+    public class MessageEventPumpDispatcher<TMessage> : MicroServiceEventPumpTimerProcess, IMessageEventDispatcher<TMessage>, IDisposable
     {
 
-        public MessageEventPumpDispatcher()
+        public MessageEventPumpDispatcher(string intendedRecipient = null)
         {
+            _intendedRecipient = intendedRecipient;
             Starting += OnStarting;
             Stopping += OnStopping;
         }
@@ -31,8 +32,9 @@ namespace Chorea
             }
         }
 
-        public event EventHandler<MessageEventArgs> MessageReceived;
+        public event EventHandler<MessageEventArgs<TMessage>> MessageReceived;
         readonly List<object> _microServices = new List<object>();
+        private readonly string _intendedRecipient;
 
         public virtual void RegisterMessageSource(object service)
         {
@@ -44,25 +46,25 @@ namespace Chorea
         public override void Tick()
         {
             // iterate over known IHasMessageQueue services
-            foreach (IHasMessageQueue service in _microServices.Where(s => s is IHasMessageQueue))
+            foreach (IHasMessageQueue<TMessage> service in _microServices.Where(s => s is IHasMessageQueue<TMessage>))
             {
                 // flush this service's queue
                 while (!service.MessageQueue.IsEmpty)
                 {
-                    object message;
+                    TMessage message;
                     if (service.MessageQueue.TryDequeue(out message))
-                        MessageReceived?.Invoke(this, new MessageEventArgs(message));
+                        MessageReceived?.Invoke(this, new MessageEventArgs<TMessage>(service.QueueName, message));
                 }
             }
             // iterate over known IHasPublishedMessages services
-            foreach (IHasPublishedMessages service in _microServices.Where(s => s is IHasPublishedMessages))
+            foreach (IHasPublishedMessages<TMessage> service in _microServices.Where(s => s is IHasPublishedMessages<TMessage>))
             {
                 // flush this service's queue
                 //var message = service.MessageQueue.Dequeue();
                 //MessageReceived?.Invoke(this, new MessageEventArgs(message));
-                foreach (var message in service.PublishedMessages.GetPublishedMessagesSinceLast())
+                foreach (var message in service.PublishedMessages.GetAllPublishedMessagesSinceLast(_intendedRecipient))
                 {
-                    MessageReceived?.Invoke(this, new MessageEventArgs(message));
+                    MessageReceived?.Invoke(this, new MessageEventArgs<TMessage>(message));
                 }
             }
         }
@@ -74,6 +76,24 @@ namespace Chorea
                 stoppable?.Stop();
             foreach (var disposable in _microServices.Select(service => service as IDisposable))
                 disposable?.Dispose();
+        }
+
+        public override void Pause()
+        {
+            base.Pause();
+            foreach (IPausable process in _microServices.Where(service => service is IPausable))
+            {
+                process.Pause();
+            }
+        }
+
+        public override void Continue()
+        {
+            base.Continue();
+            foreach (IPausable process in _microServices.Where(service => service is IPausable))
+            {
+                process.Continue();
+            }
         }
     }
 }
