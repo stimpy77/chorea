@@ -45,9 +45,9 @@ namespace WinFormsFirehose
         private void AddNewFirehose()
         {
             var firehose = new DataFirehose();
+            _microserviceMessageDispatcher.RegisterMessageSource(firehose);
             firehose.Start();
             if (_paused) firehose.Pause();
-            _microserviceMessageDispatcher.RegisterMessageSource(firehose);
             UpdateFirehoseCountLabel();
         }
 
