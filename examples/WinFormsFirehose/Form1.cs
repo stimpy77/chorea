@@ -14,27 +14,27 @@ namespace WinFormsFirehose
 {
     public partial class Form1 : Form
     {
-        private readonly EventPumpMessageEventDispatcher<QueueMessage> _microserviceMessageDispatcher;
+        private readonly EventPumpMessageEventDispatcher<QueueMessage> _messageDispatcher;
         private bool _paused;
 
         public Form1()
         {
             InitializeComponent();
-            _microserviceMessageDispatcher = new EventPumpMessageEventDispatcher<QueueMessage>();
-            _microserviceMessageDispatcher.MessageReceived += MicroserviceMessageDispatcherOnMessageReceived;
+            _messageDispatcher = new EventPumpMessageEventDispatcher<QueueMessage>();
+            _messageDispatcher.MessageReceived += OnFirehoseMessageReceived;
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            _microserviceMessageDispatcher.Start();
+            _messageDispatcher.Start();
         }
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
-            _microserviceMessageDispatcher.Stop();
+            _messageDispatcher.Stop();
         }
 
-        private void MicroserviceMessageDispatcherOnMessageReceived(object sender, MessageEventArgs<QueueMessage> messageEventArgs)
+        private void OnFirehoseMessageReceived(object sender, MessageEventArgs<QueueMessage> messageEventArgs)
         {
             if (lstMessages.Items.Count > 40) lstMessages.Items.RemoveAt(0);
             var message = messageEventArgs.Message.Value;
@@ -45,7 +45,7 @@ namespace WinFormsFirehose
         private void AddNewFirehose()
         {
             var firehose = new DataFirehose();
-            _microserviceMessageDispatcher.RegisterMessageSource(firehose);
+            _messageDispatcher.RegisterMessageSource(firehose);
             firehose.Start();
             if (_paused) firehose.Pause();
             UpdateFirehoseCountLabel();
@@ -53,10 +53,10 @@ namespace WinFormsFirehose
 
         private void RemoveFirehose()
         {
-            if (_microserviceMessageDispatcher.MessageSources.Count == 0) return;
-            var firehose = _microserviceMessageDispatcher.MessageSources[0] as DataFirehose;
+            if (_messageDispatcher.MessageSources.Count == 0) return;
+            var firehose = _messageDispatcher.MessageSources[0] as DataFirehose;
             firehose?.Stop();
-            _microserviceMessageDispatcher.MessageSources.RemoveAt(0);
+            _messageDispatcher.MessageSources.RemoveAt(0);
             UpdateFirehoseCountLabel();
         }
 
@@ -67,7 +67,7 @@ namespace WinFormsFirehose
 
         private void UpdateFirehoseCountLabel()
         {
-            lblFirehoseCount.Text = "Firehose count: " + _microserviceMessageDispatcher.MessageSources.Count;
+            lblFirehoseCount.Text = "Firehose count: " + _messageDispatcher.MessageSources.Count;
         }
 
         void cmdRemoveFirehose_Click(object sender, EventArgs e)
@@ -92,13 +92,13 @@ namespace WinFormsFirehose
         private void Pause()
         {
             _paused = true;
-            _microserviceMessageDispatcher.Pause();
+            _messageDispatcher.Pause();
         }
 
         private void Continue()
         {
             _paused = false;
-            _microserviceMessageDispatcher.Continue();
+            _messageDispatcher.Continue();
         }
     }
 }
