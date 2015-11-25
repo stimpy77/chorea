@@ -80,6 +80,7 @@
             // 
             // cmdPauseContinue
             // 
+            this.cmdPauseContinue.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.cmdPauseContinue.Location = new System.Drawing.Point(228, 271);
             this.cmdPauseContinue.Name = "cmdPauseContinue";
             this.cmdPauseContinue.Size = new System.Drawing.Size(78, 23);

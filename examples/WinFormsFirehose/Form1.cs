@@ -36,7 +36,7 @@ namespace WinFormsFirehose
 
         private void MicroserviceMessageDispatcherOnMessageReceived(object sender, MessageEventArgs<QueueMessage> messageEventArgs)
         {
-            if (lstMessages.Items.Count > 100) lstMessages.Items.RemoveAt(0);
+            if (lstMessages.Items.Count > 40) lstMessages.Items.RemoveAt(0);
             var message = messageEventArgs.Message.Value;
             lstMessages.Items.Add(message);
             lstMessages.SelectedIndex = lstMessages.Items.Count - 1;

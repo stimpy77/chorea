@@ -24,13 +24,16 @@ namespace Chorea
             recipientKey = recipientKey ?? _route;
             if (!(id is int)) throw new ArgumentException("This container uses System.Int32 as the message ID.");
             var idx = (int) id;
-            var count = _messages.Count;
-            for (var i = idx + 1; i < count && i >= 0; i++)
+            lock (_messages)
             {
-                if (recipientKey == null || _messages[i].Key == recipientKey)
-                    yield return _messages[i];
+                var count = _messages.Count;
+                for (var i = idx + 1; i < count && i >= 0; i++)
+                {
+                    if (recipientKey == null || _messages[i].Key == recipientKey)
+                        yield return _messages[i];
+                }
+                _last = count - 1;
             }
-            _last = count - 1;
         }
 
         public IEnumerable<KeyValuePair<string, TMessage>> GetAllPublishedMessagesSinceLast(string recipientKey = null)
