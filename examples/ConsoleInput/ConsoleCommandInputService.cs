@@ -10,13 +10,13 @@ using Chorea;
 namespace ConsoleInput
 {
     public class ConsoleCommandInputService : MicroServiceThreadedProcess,
-        IHasMessageQueue<UserCommandMessage>
+        IHasMessageQueue<QueueMessage>
         //IHasPublishedMessages 
     {
         //public IPublishedMessages PublishedMessages { get; set; } = new LocalMessagePublishContainer();
 
-        readonly BasicMessageQueueContainer<UserCommandMessage> _messageQueue = new BasicMessageQueueContainer<UserCommandMessage>();
-        public ConcurrentQueue<UserCommandMessage> MessageQueue => _messageQueue.MessageQueue;
+        readonly BasicMessageQueueContainer<QueueMessage> _messageQueue = new BasicMessageQueueContainer<QueueMessage>();
+        public ConcurrentQueue<QueueMessage> MessageQueue => _messageQueue.MessageQueue;
         public string QueueName => "CommandInput";
         private string Prompt { get; set; } = "? ";
 

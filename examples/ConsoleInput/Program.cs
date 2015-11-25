@@ -12,7 +12,7 @@ namespace ConsoleInput
     {
         static void Main(string[] args)
         {
-            using (var messageEventDispatcher = new ThreadedMessageEventDispatcher<UserCommandMessage>())
+            using (var messageEventDispatcher = new ThreadedMessageEventDispatcher<QueueMessage>())
             {
                 messageEventDispatcher.RegisterMessageSource(new ConsoleCommandInputService());
                 var commandProcessor = new CommandProcessor(messageEventDispatcher);
