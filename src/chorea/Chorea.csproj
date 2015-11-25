@@ -43,7 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IEnqueueMessage.cs" />
-    <Compile Include="IHasMessageQueue.cs" />
+    <Compile Include="IHasBclMessageQueue.cs" />
     <Compile Include="IHasPublishedMessages.cs" />
     <Compile Include="IMessageEventDispatcher.cs" />
     <Compile Include="IPublishMessage.cs" />

@@ -14,7 +14,8 @@ namespace ConsoleInput
         {
             using (var messageEventDispatcher = new ThreadedMessageEventDispatcher<QueueMessage>())
             {
-                messageEventDispatcher.RegisterMessageSource(new ConsoleCommandInputService());
+                var commandInputLoop = new ConsoleCommandInputService();
+                messageEventDispatcher.RegisterMessageSource(commandInputLoop);
                 var commandProcessor = new CommandProcessor(messageEventDispatcher);
                 messageEventDispatcher.Start();
                 while (messageEventDispatcher.IsRunning) Thread.Sleep(100);

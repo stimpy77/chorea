@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Chorea
 {
-    public class BasicMessageQueueContainer<T> : IHasMessageQueue<T>, IEnqueueMessage<T>
+    public class BasicMessageQueueContainer<T> : IHasBclMessageQueue<T>, IEnqueueMessage<T>
     {
         public BasicMessageQueueContainer(string queueName = null)
         {

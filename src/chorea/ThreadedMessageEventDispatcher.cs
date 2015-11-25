@@ -41,7 +41,7 @@ namespace Chorea
         {
             _microServices.Add(service);
         }
-        public virtual void RegisterMessageSource<T>(IHasMessageQueue<T> service)
+        public virtual void RegisterMessageSource<T>(IHasBclMessageQueue<T> service)
         {
             _microServices.Add(service);
         }
@@ -52,7 +52,7 @@ namespace Chorea
             while (!Stopped)
             {
                 // iterate over known IHasMessageQueue services
-                foreach (IHasMessageQueue<TMessage> service in _microServices.Where(s => s is IHasMessageQueue<TMessage>))
+                foreach (IHasBclMessageQueue<TMessage> service in _microServices.Where(s => s is IHasBclMessageQueue<TMessage>))
                 {
                     // flush this service's queue
                     while (!service.MessageQueue.IsEmpty)

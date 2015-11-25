@@ -9,11 +9,11 @@ using Chorea;
 
 namespace ConsoleInput
 {
-    public class ConsoleCommandInputService : MicroServiceThreadedProcess,
-        IHasMessageQueue<QueueMessage>
-        //IHasPublishedMessages 
+    public class ConsoleCommandInputService : MicroServiceThreadedProcess, 
+        IHasBclMessageQueue<QueueMessage>
+        //IHasPublishedMessages<QueueMessage>
     {
-        //public IPublishedMessages PublishedMessages { get; set; } = new LocalMessagePublishContainer();
+        //public IPublishedMessages<QueueMessage> PublishedMessages { get; set; } = new LocalMessagePublishContainer<QueueMessage>();
 
         readonly BasicMessageQueueContainer<QueueMessage> _messageQueue = new BasicMessageQueueContainer<QueueMessage>();
         public ConcurrentQueue<QueueMessage> MessageQueue => _messageQueue.MessageQueue;
