@@ -12,12 +12,14 @@ namespace WinFormsFirehose
         readonly int _firehoseIndex = ++_firehoseCount;
         static int _firehoseCount;
         private bool _paused;
+        private long _ctr;
 
         public override void Run()
         {
+            ((LocalMessagePublishContainer<QueueMessage>) PublishedMessages).Threshold = 10;
             while (!Stopped)
             {
-                if (!_paused) Publish(new QueueMessage("Firehose", _firehoseIndex + " message: " + Guid.NewGuid().ToString()));
+                if (!_paused) Publish(new QueueMessage("Firehose", _firehoseIndex + " message: " + _ctr++ + "-" + Guid.NewGuid().ToString()));
                 System.Threading.Thread.Sleep(10);
             }
         }

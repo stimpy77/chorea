@@ -18,6 +18,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinFormsFirehose", "..\exam
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BrokenRecordConsole", "..\examples\BrokenRecordConsole\BrokenRecordConsole.csproj", "{4FDC4D73-7CFC-4CF2-BFF4-504357C970DF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Chorea.Windows", "Chorea.Windows\Chorea.Windows.csproj", "{4909249A-B764-42E6-91E6-EB9389D0C3CF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -40,6 +42,10 @@ Global
 		{4FDC4D73-7CFC-4CF2-BFF4-504357C970DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4FDC4D73-7CFC-4CF2-BFF4-504357C970DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4FDC4D73-7CFC-4CF2-BFF4-504357C970DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4909249A-B764-42E6-91E6-EB9389D0C3CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4909249A-B764-42E6-91E6-EB9389D0C3CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4909249A-B764-42E6-91E6-EB9389D0C3CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4909249A-B764-42E6-91E6-EB9389D0C3CF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
-namespace Chorea
+namespace Chorea.Windows
 {
     public class MessageEventPumpDispatcher<TMessage> : MicroServiceEventPumpTimerProcess, IMessageEventDispatcher<TMessage>, IDisposable
     {
