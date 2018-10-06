@@ -1,4 +1,4 @@
-#chorea
+# chorea
 
 Root word for "choreography". 
 
@@ -21,12 +21,12 @@ Also,
 
 How wonderful. Here's some context: http://www.slideshare.net/JonDavis20/initial-simple-ponderings-on-discrete-subprocesses-and-orchestrating-convergence
 
-##What this is (currently)
+## What this is (currently)
 
 A playground of some interfaces and classes that make it easy to run an actor-like microservice-ish component and send data back using a basic messaging subsystem.
 Actually, there is nothing actor-like in here at all yet. There's some subprocess-y stuff in here though.
 
-##What I want
+## What I want
 
 * Putting Object Oriented Programming mindset on steroids (complete with known side-effects) by making simple objects self-contained and encapsulated
 * Habitually write software to be reactive to external messages rather than directly programmatically activated
