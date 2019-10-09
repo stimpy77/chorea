@@ -23,7 +23,7 @@ How wonderful. Here's some context: http://www.slideshare.net/JonDavis20/initial
 
 ## What this is (currently)
 
-A few little demonstrations of using simple messages in a concurrent queue to drive application behavior. 
+A few little demonstrations of using simple messages in a concurrent queue to drive an application. 
 
 It was intended to be:
 A playground of some interfaces and classes that make it easy to run an actor-like microservice-ish component and send data back using a basic messaging subsystem.
